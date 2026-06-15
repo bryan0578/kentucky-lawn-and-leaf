@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import { SITE } from '@/lib/site-data'
 import { cn } from '@/lib/utils'
 
 type EmblemTone = 'default' | 'light'
@@ -12,7 +13,7 @@ interface BrandEmblemProps {
 export function BrandEmblem({ className }: BrandEmblemProps) {
   return (
     <Image
-      src="/KLL_Header_Logo.png"
+      src={SITE.logo}
       alt="Kentucky Lawn & Leaf emblem"
       width={48}
       height={48}

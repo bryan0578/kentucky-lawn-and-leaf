@@ -5,15 +5,21 @@ import { COMPANY, SITE, type PageSeo } from '@/lib/site-data'
 
 let resolvedOgImagePath: string | null = null
 
+function publicAssetPath(assetPath: string): string {
+  return path.join(
+    process.cwd(),
+    'public',
+    assetPath.startsWith('/') ? assetPath.slice(1) : assetPath,
+  )
+}
+
 /** Returns the configured Open Graph / Twitter image path. */
 export function getOgImagePath(): string {
   if (resolvedOgImagePath) {
     return resolvedOgImagePath
   }
 
-  const filename = SITE.ogImage.replace(/^\//, '')
-  const ogImageFile = path.join(process.cwd(), 'public', filename)
-  resolvedOgImagePath = fs.existsSync(ogImageFile)
+  resolvedOgImagePath = fs.existsSync(publicAssetPath(SITE.ogImage))
     ? SITE.ogImage
     : SITE.ogImageFallback
 
@@ -25,6 +31,20 @@ export const SITE_URL = SITE.url
 export function absoluteUrl(routePath: string): string {
   const normalizedPath = routePath.startsWith('/') ? routePath : `/${routePath}`
   return new URL(normalizedPath, SITE.url).toString()
+}
+
+function buildSocialImageMetadata(imagePath: string, alt: string) {
+  const imageUrl = absoluteUrl(imagePath)
+
+  return {
+    openGraphImage: {
+      url: imageUrl,
+      width: SITE.ogImageWidth,
+      height: SITE.ogImageHeight,
+      alt,
+    },
+    twitterImage: imageUrl,
+  }
 }
 
 type CreatePageMetadataOptions = PageSeo & {
@@ -42,8 +62,11 @@ export function createPageMetadata({
 }: CreatePageMetadataOptions): Metadata {
   const url = absoluteUrl(path)
   const imagePath = ogImage ?? getOgImagePath()
-  const imageUrl = absoluteUrl(imagePath)
   const imageAlt = ogImageAlt ?? SITE.ogImageAlt
+  const { openGraphImage, twitterImage } = buildSocialImageMetadata(
+    imagePath,
+    imageAlt,
+  )
 
   const openGraph = {
     title: absoluteTitle ?? title,
@@ -52,21 +75,14 @@ export function createPageMetadata({
     siteName: COMPANY.name,
     locale: SITE.locale,
     type: 'website' as const,
-    images: [
-      {
-        url: imageUrl,
-        width: 1200,
-        height: 630,
-        alt: imageAlt,
-      },
-    ],
+    images: [openGraphImage],
   }
 
   const twitter = {
     card: SITE.twitterCard,
     title: absoluteTitle ?? title,
     description,
-    images: [imageUrl],
+    images: [twitterImage],
   }
 
   if (absoluteTitle) {
@@ -96,7 +112,10 @@ export function createPageMetadata({
 
 export function createRootMetadata(): Metadata {
   const ogImagePath = getOgImagePath()
-  const ogImageUrl = absoluteUrl(ogImagePath)
+  const { openGraphImage, twitterImage } = buildSocialImageMetadata(
+    ogImagePath,
+    SITE.ogImageAlt,
+  )
 
   return {
     metadataBase: new URL(SITE.url),
@@ -120,37 +139,30 @@ export function createRootMetadata(): Metadata {
       siteName: COMPANY.name,
       title: SITE.absoluteDefaultTitle,
       description: SITE.defaultDescription,
-      images: [
-        {
-          url: ogImageUrl,
-          width: 1200,
-          height: 630,
-          alt: SITE.ogImageAlt,
-        },
-      ],
+      images: [openGraphImage],
     },
     twitter: {
       card: SITE.twitterCard,
       title: SITE.absoluteDefaultTitle,
       description: SITE.defaultDescription,
-      images: [ogImageUrl],
+      images: [twitterImage],
     },
     icons: {
       icon: [
         {
-          url: '/icon-light-32x32.png',
+          url: SITE.favicon.light,
           media: '(prefers-color-scheme: light)',
         },
         {
-          url: '/icon-dark-32x32.png',
+          url: SITE.favicon.dark,
           media: '(prefers-color-scheme: dark)',
         },
         {
-          url: '/icon.svg',
+          url: SITE.favicon.svg,
           type: 'image/svg+xml',
         },
       ],
-      apple: '/apple-icon.png',
+      apple: SITE.favicon.apple,
     },
   }
 }

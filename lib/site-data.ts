@@ -37,10 +37,21 @@ export const SITE = {
   defaultTitle: 'Lawn Care, Landscaping & Leaf Removal',
   absoluteDefaultTitle: `${COMPANY.name} | Lawn Care, Landscaping & Leaf Removal`,
   titleTemplate: `%s | ${COMPANY.name}`,
-  ogImage: '/KentuckyLawnAndLeafOpenGraph.png',
-  ogImageFallback: '/hero-lawn.png',
-  ogImageAlt: `${COMPANY.name} — lawn care and landscaping in Northern Kentucky`,
+  ogImage: '/images/KentuckyLawnAndLeafOpenGraph.png',
+  ogImageFallback: '/images/hero-lawn.png',
+  ogImageAlt:
+    'Kentucky Lawn & Leaf — professional lawn care, landscaping, and leaf removal in Northern Kentucky',
+  ogImageWidth: 1200,
+  ogImageHeight: 630,
   twitterCard: 'summary_large_image' as const,
+  logo: '/images/KLL_Header_Logo.png',
+  defaultBusinessImage: '/images/hero-lawn.png',
+  favicon: {
+    light: '/images/icon-light-32x32.png',
+    dark: '/images/icon-dark-32x32.png',
+    svg: '/icon.svg',
+    apple: '/images/apple-icon.png',
+  },
 }
 
 /** Stable year for copyright — evaluated once at build/load time, not during render. */
@@ -136,7 +147,7 @@ export const SERVICES: Service[] = [
       'Seasonal treatment recommendations',
     ],
     image: {
-      src: '/hero-lawn.png',
+      src: '/images/hero-lawn.png',
       alt: 'Freshly mowed green lawn in front of a Kentucky home',
     },
     ctaText: 'Get My Lawn Care Quote',
@@ -162,7 +173,7 @@ export const SERVICES: Service[] = [
       'Spring and fall service availability',
     ],
     image: {
-      src: '/after-leaves.png',
+      src: '/images/after-leaves.png',
       alt: 'Clean Kentucky yard after professional leaf removal',
     },
     ctaText: 'Schedule Leaf Cleanup',
@@ -188,7 +199,7 @@ export const SERVICES: Service[] = [
       'Finished edges and initial mulch placement',
     ],
     image: {
-      src: '/landscape-design.png',
+      src: '/images/landscape-design.png',
       alt: 'Professionally landscaped front yard beds in Kentucky',
     },
     ctaText: 'Start My Landscaping Quote',
@@ -214,7 +225,7 @@ export const SERVICES: Service[] = [
       'Hard-surface blowing and final walkthrough',
     ],
     image: {
-      src: '/seasonal-leaves.png',
+      src: '/images/seasonal-leaves.png',
       alt: 'Seasonal yard cleanup on a Kentucky property',
     },
     ctaText: 'Book Seasonal Cleanup',
@@ -240,7 +251,7 @@ export const SERVICES: Service[] = [
       'Cleanup of walkways and hard surfaces',
     ],
     image: {
-      src: '/gallery-mulch.png',
+      src: '/images/gallery-mulch.png',
       alt: 'Fresh mulch installed in landscaped garden beds',
     },
     ctaText: 'Get My Mulch Quote',
@@ -266,7 +277,7 @@ export const SERVICES: Service[] = [
       'Clipping removal and final blow-off',
     ],
     image: {
-      src: '/gallery-edge.png',
+      src: '/images/gallery-edge.png',
       alt: 'Crisp lawn edging along a Kentucky sidewalk',
     },
     ctaText: 'Request Trimming & Edging',
@@ -365,7 +376,7 @@ export const HERO = {
     'Free quotes with no obligation',
   ],
   image: {
-    src: '/hero-lawn.png',
+    src: '/images/hero-lawn.png',
     alt: 'Freshly mowed, lush green lawn in front of a Northern Kentucky home',
   },
   statBadge: {
@@ -490,7 +501,7 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     title: 'Weekly Lawn Maintenance',
     category: 'Lawn Care',
     image: {
-      src: '/hero-lawn.png',
+      src: '/images/hero-lawn.png',
       alt: 'Freshly mowed Kentucky lawn',
     },
     description:
@@ -501,7 +512,7 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     title: 'Bi-Weekly Turf Refresh',
     category: 'Lawn Care',
     image: {
-      src: '/placeholder.jpg',
+      src: '/images/placeholder.jpg',
       alt: 'Placeholder — green residential lawn',
     },
     description:
@@ -512,7 +523,7 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     title: 'Seasonal Lawn Treatment',
     category: 'Lawn Care',
     image: {
-      src: '/placeholder.jpg',
+      src: '/images/placeholder.jpg',
       alt: 'Placeholder — healthy green grass',
     },
     description:
@@ -523,7 +534,7 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     title: 'Fall Leaf Removal',
     category: 'Leaf Removal',
     image: {
-      src: '/after-leaves.png',
+      src: '/images/after-leaves.png',
       alt: 'Kentucky yard after professional leaf removal',
     },
     description:
@@ -534,7 +545,7 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     title: 'Spring Leaf & Debris Cleanup',
     category: 'Leaf Removal',
     image: {
-      src: '/placeholder.jpg',
+      src: '/images/placeholder.jpg',
       alt: 'Placeholder — spring yard cleanup',
     },
     description:
@@ -545,7 +556,7 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     title: 'Front Bed Redesign',
     category: 'Landscaping',
     image: {
-      src: '/landscape-design.png',
+      src: '/images/landscape-design.png',
       alt: 'Professionally landscaped front beds in Kentucky',
     },
     description:
@@ -556,7 +567,7 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     title: 'Shrub & Perennial Installation',
     category: 'Landscaping',
     image: {
-      src: '/placeholder.jpg',
+      src: '/images/placeholder.jpg',
       alt: 'Placeholder — shrub and perennial planting',
     },
     description:
@@ -567,7 +578,7 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     title: 'Curb Appeal Refresh',
     category: 'Landscaping',
     image: {
-      src: '/placeholder.jpg',
+      src: '/images/placeholder.jpg',
       alt: 'Placeholder — enhanced front landscape',
     },
     description:
@@ -578,7 +589,7 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     title: 'Spring Property Reset',
     category: 'Cleanup',
     image: {
-      src: '/placeholder.jpg',
+      src: '/images/placeholder.jpg',
       alt: 'Placeholder — spring property cleanup',
     },
     description:
@@ -589,7 +600,7 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     title: 'Fall Yard Cleanup',
     category: 'Cleanup',
     image: {
-      src: '/placeholder.jpg',
+      src: '/images/placeholder.jpg',
       alt: 'Placeholder — fall yard cleanup',
     },
     description:
@@ -600,7 +611,7 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     title: 'Front Bed Mulch Install',
     category: 'Mulch',
     image: {
-      src: '/gallery-mulch.png',
+      src: '/images/gallery-mulch.png',
       alt: 'Fresh mulch installed in landscaped garden beds',
     },
     description:
@@ -611,7 +622,7 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     title: 'Full-Property Mulch Refresh',
     category: 'Mulch',
     image: {
-      src: '/placeholder.jpg',
+      src: '/images/placeholder.jpg',
       alt: 'Placeholder — mulched landscape beds',
     },
     description:
@@ -627,11 +638,11 @@ export const FEATURED_GALLERY_IDS = [
 
 export const BEFORE_AFTER = {
   before: {
-    src: '/before-leaves.png',
+    src: '/images/before-leaves.png',
     alt: 'Northern Kentucky yard covered in fallen leaves before cleanup',
   },
   after: {
-    src: '/after-leaves.png',
+    src: '/images/after-leaves.png',
     alt: 'Same Northern Kentucky yard after professional leaf removal and cleanup',
   },
   ctaLabel: 'Get My Free Quote',
@@ -657,7 +668,7 @@ export const SEASONAL_PROMO = {
   primaryCta: 'Reserve My Cleanup',
   secondaryCta: 'Call Now',
   image: {
-    src: '/seasonal-leaves.png',
+    src: '/images/seasonal-leaves.png',
     alt: 'Autumn leaves being cleared from a Northern Kentucky yard',
   },
 }
