@@ -140,9 +140,14 @@ export function QuoteRequestForm({
         </div>
 
         {showTitle && (
-          <h3 className="font-heading text-xl font-semibold text-foreground">
-            {QUOTE_FORM.title}
-          </h3>
+          <div>
+            <h3 className="font-heading text-xl font-semibold text-foreground">
+              {QUOTE_FORM.title}
+            </h3>
+            <p className="mt-2 text-pretty text-sm leading-relaxed text-muted-foreground">
+              {QUOTE_FORM.intro}
+            </p>
+          </div>
         )}
 
         {successMessage && (
@@ -297,6 +302,8 @@ export function QuoteRequestForm({
             htmlFor="addressOrZip"
             error={errors.addressOrZip?.message}
             errorId="addressOrZip-error"
+            helperText={QUOTE_FORM.fields.addressOrZip.helperText}
+            helperId="addressOrZip-helper"
             required
           >
             <input
@@ -306,7 +313,9 @@ export function QuoteRequestForm({
               placeholder={QUOTE_FORM.fields.addressOrZip.placeholder}
               aria-invalid={Boolean(errors.addressOrZip)}
               aria-describedby={
-                errors.addressOrZip ? 'addressOrZip-error' : undefined
+                errors.addressOrZip
+                  ? 'addressOrZip-error'
+                  : 'addressOrZip-helper'
               }
               className={cn(
                 inputClassName,
@@ -322,13 +331,17 @@ export function QuoteRequestForm({
               htmlFor="serviceNeeded"
               error={errors.serviceNeeded?.message}
               errorId="serviceNeeded-error"
+              helperText={QUOTE_FORM.fields.serviceNeeded.helperText}
+              helperId="serviceNeeded-helper"
               required
             >
               <select
                 id="serviceNeeded"
                 aria-invalid={Boolean(errors.serviceNeeded)}
                 aria-describedby={
-                  errors.serviceNeeded ? 'serviceNeeded-error' : undefined
+                  errors.serviceNeeded
+                    ? 'serviceNeeded-error'
+                    : 'serviceNeeded-helper'
                 }
                 className={cn(
                   inputClassName,
@@ -366,6 +379,8 @@ export function QuoteRequestForm({
             label={QUOTE_FORM.fields.preferredContactMethod.label}
             error={errors.preferredContactMethod?.message}
             errorId="preferredContactMethod-error"
+            helperText={QUOTE_FORM.fields.preferredContactMethod.helperText}
+            helperId="preferredContactMethod-helper"
             required
           >
             <Controller
@@ -384,7 +399,7 @@ export function QuoteRequestForm({
                   aria-describedby={
                     errors.preferredContactMethod
                       ? 'preferredContactMethod-error'
-                      : undefined
+                      : 'preferredContactMethod-helper'
                   }
                 >
                   {CONTACT_METHODS.map((method) => {
@@ -483,6 +498,8 @@ function Field({
   htmlFor,
   error,
   errorId,
+  helperText,
+  helperId,
   required = false,
   children,
 }: {
@@ -490,6 +507,8 @@ function Field({
   htmlFor?: string
   error?: string
   errorId?: string
+  helperText?: string
+  helperId?: string
   required?: boolean
   children: React.ReactNode
 }) {
@@ -502,6 +521,11 @@ function Field({
         {required && <span className="text-destructive"> *</span>}
       </label>
       {children}
+      {helperText && !error && helperId && (
+        <p id={helperId} className="text-xs leading-relaxed text-muted-foreground">
+          {helperText}
+        </p>
+      )}
       {error && messageId && (
         <p
           id={messageId}

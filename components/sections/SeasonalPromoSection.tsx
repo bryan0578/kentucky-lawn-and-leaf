@@ -28,7 +28,9 @@ export function SeasonalPromoSection() {
                   nativeButton={false}
                   className="h-12 bg-gold px-6 text-base text-gold-foreground hover:bg-gold/90"
                   render={
-                    <Link href={ROUTES.requestQuote}>Reserve cleanup</Link>
+                    <Link href={ROUTES.requestQuote}>
+                      {SEASONAL_PROMO.primaryCta}
+                    </Link>
                   }
                 />
                 <Button
@@ -39,7 +41,7 @@ export function SeasonalPromoSection() {
                   render={
                     <a href={COMPANY.phoneHref}>
                       <Phone className="size-4" />
-                      Call Now
+                      {SEASONAL_PROMO.secondaryCta}
                     </a>
                   }
                 />

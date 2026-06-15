@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { Phone, Mail, MapPin } from 'lucide-react'
 import { BrandLogo } from '@/components/brand-logo'
 import { FOOTER_COMPANY_LINKS, ROUTES, serviceRoute } from '@/lib/constants'
-import { COMPANY, SERVICES } from '@/lib/site-data'
+import { COMPANY, FOOTER, SERVICES } from '@/lib/site-data'
 
 export function SiteFooter() {
   return (
@@ -13,6 +13,9 @@ export function SiteFooter() {
             <BrandLogo tone="light" />
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-primary-foreground/75">
               {COMPANY.tagline}
+            </p>
+            <p className="mt-3 max-w-xs text-sm leading-relaxed text-primary-foreground/60">
+              {FOOTER.contactNote}
             </p>
           </div>
 
@@ -87,7 +90,7 @@ export function SiteFooter() {
           <p>
             © {new Date().getFullYear()} {COMPANY.name}. All rights reserved.
           </p>
-          <p>{COMPANY.footerLegal}</p>
+          <p>{FOOTER.legalLine}</p>
         </div>
       </div>
     </footer>

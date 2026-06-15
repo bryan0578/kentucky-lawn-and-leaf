@@ -1,15 +1,10 @@
 import type { Metadata } from 'next'
 import { SiteLayout } from '@/components/layout/SiteLayout'
 import { ReviewsSection } from '@/components/sections/ReviewsSection'
-import { ROUTES } from '@/lib/constants'
 import { createPageMetadata } from '@/lib/seo'
+import { PAGE_SEO } from '@/lib/site-data'
 
-export const metadata: Metadata = createPageMetadata({
-  title: 'Reviews',
-  description:
-    'Read reviews from Northern Kentucky homeowners about lawn care, landscaping, and seasonal yard services from Kentucky Lawn & Leaf.',
-  path: ROUTES.reviews,
-})
+export const metadata: Metadata = createPageMetadata(PAGE_SEO.reviews)
 
 export default function ReviewsPage() {
   return (

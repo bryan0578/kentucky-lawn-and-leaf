@@ -2,9 +2,13 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { SiteLayout } from '@/components/layout/SiteLayout'
 import { ServiceDetailSection } from '@/components/sections/ServiceDetailSection'
-import { ROUTES, serviceRoute } from '@/lib/constants'
 import { createPageMetadata } from '@/lib/seo'
-import { getAllServiceSlugs, getServiceBySlug } from '@/lib/site-data'
+import {
+  getAllServiceSlugs,
+  getServiceBySlug,
+  getServicePageSeo,
+  PAGE_SEO,
+} from '@/lib/site-data'
 
 type ServicePageProps = {
   params: Promise<{ slug: string }>
@@ -22,20 +26,14 @@ export async function generateMetadata({
 
   if (!service) {
     return createPageMetadata({
+      ...PAGE_SEO.services,
       title: 'Service Not Found',
       description: 'The requested service could not be found.',
-      path: ROUTES.services,
       noIndex: true,
     })
   }
 
-  return createPageMetadata({
-    title: service.title,
-    description: service.shortDescription,
-    path: serviceRoute(slug),
-    ogImage: service.image.src,
-    ogImageAlt: service.image.alt,
-  })
+  return createPageMetadata(getServicePageSeo(service))
 }
 
 export default async function ServiceDetailPage({ params }: ServicePageProps) {

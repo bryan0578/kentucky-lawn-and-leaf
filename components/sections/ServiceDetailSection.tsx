@@ -4,7 +4,7 @@ import { ArrowLeft, CheckCircle2 } from 'lucide-react'
 import { ServiceQuoteCta } from '@/components/sections/ServiceQuoteCta'
 import { JsonLd } from '@/components/seo/JsonLd'
 import { ROUTES } from '@/lib/constants'
-import { buildServiceJsonLd } from '@/lib/structured-data'
+import { buildServiceBreadcrumbJsonLd, buildServiceJsonLd } from '@/lib/structured-data'
 import { type Service } from '@/lib/site-data'
 
 interface ServiceDetailSectionProps {
@@ -15,6 +15,7 @@ export function ServiceDetailSection({ service }: ServiceDetailSectionProps) {
   return (
     <>
       <JsonLd data={buildServiceJsonLd(service)} />
+      <JsonLd data={buildServiceBreadcrumbJsonLd(service)} />
       <section className="py-12 lg:py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <Link

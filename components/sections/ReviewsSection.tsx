@@ -1,13 +1,13 @@
 import Link from 'next/link'
-import { ArrowRight, Quote, Star } from 'lucide-react'
+import { ArrowRight, Sparkles } from 'lucide-react'
 import { SectionHeading } from '@/components/section-heading'
 import { Button } from '@/components/ui/button'
 import { ROUTES, SECTION_IDS, SECTION_PADDING } from '@/lib/constants'
 import {
+  REVIEW_PLACEHOLDERS,
   REVIEWS_CTA,
   SECTION_COPY,
-  TESTIMONIALS,
-  type Testimonial,
+  type ReviewPlaceholder,
 } from '@/lib/site-data'
 import { cn } from '@/lib/utils'
 
@@ -16,51 +16,28 @@ interface ReviewsSectionProps {
   showCta?: boolean
 }
 
-function StarRating({ rating }: { rating: number }) {
+function ReviewPlaceholderCard({ item }: { item: ReviewPlaceholder }) {
   return (
-    <div className="flex" aria-label={`${rating} out of 5 stars`}>
-      {Array.from({ length: 5 }).map((_, index) => (
-        <Star
-          key={index}
-          className={cn(
-            'size-4',
-            index < rating ? 'fill-gold text-gold' : 'text-border',
-          )}
-        />
-      ))}
-    </div>
-  )
-}
-
-function ReviewCard({ testimonial }: { testimonial: Testimonial }) {
-  return (
-    <figure className="flex h-full flex-col rounded-2xl border border-border bg-card p-7 transition-all hover:-translate-y-1 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5">
+    <article className="flex h-full flex-col rounded-2xl border border-border bg-card p-7 transition-all hover:-translate-y-1 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5">
       <div className="flex items-start justify-between gap-4">
-        <Quote className="size-8 shrink-0 text-gold" />
-        <StarRating rating={testimonial.rating} />
+        <Sparkles className="size-8 shrink-0 text-gold" aria-hidden />
+        <span className="rounded-full bg-secondary px-3 py-1 text-xs font-semibold text-primary">
+          {item.service}
+        </span>
       </div>
 
-      <blockquote className="mt-4 flex-1 text-pretty leading-relaxed text-foreground">
-        “{testimonial.quote}”
-      </blockquote>
+      <h3 className="mt-4 font-heading text-lg font-semibold text-foreground">
+        {item.title}
+      </h3>
 
-      <figcaption className="mt-6 border-t border-border pt-5">
-        <p className="font-semibold text-foreground">
-          {testimonial.customerName}
-        </p>
-        <p className="mt-0.5 text-sm text-muted-foreground">
-          {testimonial.location}
-        </p>
-        <div className="mt-3 flex flex-wrap items-center gap-2">
-          <span className="rounded-full bg-secondary px-3 py-1 text-xs font-semibold text-primary">
-            {testimonial.service}
-          </span>
-          <span className="text-xs font-medium text-muted-foreground">
-            {testimonial.date}
-          </span>
-        </div>
-      </figcaption>
-    </figure>
+      <p className="mt-3 flex-1 text-pretty leading-relaxed text-muted-foreground">
+        {item.description}
+      </p>
+
+      <p className="mt-6 border-t border-border pt-5 text-xs font-medium uppercase tracking-wide text-muted-foreground">
+        What to expect
+      </p>
+    </article>
   )
 }
 
@@ -87,8 +64,8 @@ export function ReviewsSection({
           />
 
           <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-            {TESTIMONIALS.map((testimonial) => (
-              <ReviewCard key={testimonial.id} testimonial={testimonial} />
+            {REVIEW_PLACEHOLDERS.map((item) => (
+              <ReviewPlaceholderCard key={item.id} item={item} />
             ))}
           </div>
         </div>

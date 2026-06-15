@@ -20,13 +20,82 @@ export const COMPANY = {
   email: 'hello@kylawnandleaf.com',
   location: 'Northern Kentucky',
   tagline:
-    'Locally owned lawn care, landscaping, and leaf removal serving Northern Kentucky with reliable, friendly service.',
-  yearsServing: '12+',
-  yearsServingLabel: 'years serving Northern Kentucky',
-  rating: '5.0 from 200+ neighbors',
-  licensedLabel: 'Licensed & insured',
-  footerLegal: 'Licensed & insured · Locally owned',
+    'Premium lawn care, leaf removal, and landscaping for Northern Kentucky homes — delivered by a friendly local crew you can count on.',
 }
+
+export const FOOTER = {
+  legalLine: 'Locally owned · Serving Northern Kentucky',
+  contactNote:
+    'Free quotes for lawn care, landscaping, leaf removal, mulch installation, and seasonal cleanup.',
+}
+
+export const SITE = {
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? 'https://kylawnandleaf.com',
+  locale: 'en_US' as const,
+  defaultDescription:
+    'Premium lawn care, leaf removal, and landscaping for Northern Kentucky homes. Locally owned, reliable scheduling, and free quotes from a friendly local crew.',
+  defaultTitle: 'Lawn Care, Landscaping & Leaf Removal',
+  absoluteDefaultTitle: `${COMPANY.name} | Lawn Care, Landscaping & Leaf Removal`,
+  titleTemplate: `%s | ${COMPANY.name}`,
+  ogImage: '/KentuckyLawnAndLeafOpenGraph.png',
+  ogImageFallback: '/hero-lawn.png',
+  ogImageAlt: `${COMPANY.name} — lawn care and landscaping in Northern Kentucky`,
+  twitterCard: 'summary_large_image' as const,
+}
+
+export type PageSeo = {
+  title: string
+  description: string
+  path: string
+  ogImage?: string
+  ogImageAlt?: string
+  absoluteTitle?: string
+}
+
+export const PAGE_SEO = {
+  home: {
+    title: SITE.defaultTitle,
+    absoluteTitle: SITE.absoluteDefaultTitle,
+    description: SITE.defaultDescription,
+    path: '/',
+  },
+  services: {
+    title: 'Services',
+    description:
+      'Lawn care, leaf removal, landscaping, seasonal cleanup, mulch installation, and trimming and edging across Northern Kentucky.',
+    path: '/services',
+  },
+  gallery: {
+    title: 'Gallery',
+    description:
+      'Browse lawn care, landscaping, leaf removal, cleanup, and mulch projects from Northern Kentucky properties.',
+    path: '/gallery',
+  },
+  reviews: {
+    title: 'Customer Feedback',
+    description:
+      'Learn what to expect from Kentucky Lawn & Leaf — reliable lawn care, landscaping, and seasonal cleanup across Northern Kentucky. Request a free quote.',
+    path: '/reviews',
+  },
+  serviceAreas: {
+    title: 'Service Areas',
+    description:
+      'Locally owned lawn care and landscaping serving Fort Thomas, Newport, Covington, Bellevue, Dayton, Alexandria, Highland Heights, Cold Spring, and nearby Northern Kentucky communities.',
+    path: '/service-areas',
+  },
+  faq: {
+    title: 'FAQ',
+    description:
+      'Answers about free quotes, lawn care plans, service areas, leaf removal, and scheduling with Kentucky Lawn & Leaf in Northern Kentucky.',
+    path: '/faq',
+  },
+  requestQuote: {
+    title: 'Request a Quote',
+    description:
+      'Request a free, no-obligation quote for lawn care, landscaping, leaf removal, or seasonal cleanup in Northern Kentucky.',
+    path: '/request-quote',
+  },
+} satisfies Record<string, PageSeo>
 
 export type Service = {
   slug: string
@@ -48,14 +117,14 @@ export const SERVICES: Service[] = [
     slug: 'lawn-care',
     title: 'Lawn Care',
     shortDescription:
-      'Weekly and bi-weekly mowing, fertilization, and treatment plans that keep your grass thick, green, and healthy all season.',
+      'Weekly and bi-weekly mowing, edging, and cleanup that keep your Northern Kentucky lawn thick, green, and guest-ready all season.',
     longDescription:
-      'A great lawn takes consistency. Our local crews provide scheduled mowing, edging, and seasonal treatments tailored to Kentucky grass types and weather patterns. Whether you need weekly maintenance or a bi-weekly plan, we keep your turf looking sharp without you lifting a finger.',
+      'Your lawn should look great every week — not just after a rare free Saturday. Our local crew handles scheduled mowing, crisp edging, and clipping cleanup tailored to Northern Kentucky grass and weather, so your yard stays polished without you lifting a finger.',
     benefits: [
-      'Thicker, greener grass through the growing season',
+      'Consistent results from a crew that knows local turf',
       'Dependable weekly or bi-weekly scheduling',
-      'Professional edging and clipping cleanup every visit',
-      'Seasonal fertilization guidance for Kentucky lawns',
+      'Clean edges and hard-surface blow-off every visit',
+      'Seasonal care guidance for Kentucky lawns',
     ],
     includedItems: [
       'Mowing and line trimming',
@@ -67,21 +136,21 @@ export const SERVICES: Service[] = [
       src: '/hero-lawn.png',
       alt: 'Freshly mowed green lawn in front of a Kentucky home',
     },
-    ctaText: 'Get a Lawn Care Quote',
+    ctaText: 'Get My Lawn Care Quote',
     icon: Scissors,
   },
   {
     slug: 'leaf-removal',
     title: 'Leaf Removal',
     shortDescription:
-      'Fast, thorough fall and spring leaf cleanup so your yard stays tidy and your grass keeps breathing.',
+      'Thorough fall and spring leaf cleanup across Northern Kentucky — so your lawn can breathe and your property stays tidy through the seasons.',
     longDescription:
-      'Fall leaves pile up fast in Northern Kentucky. We handle full-property leaf removal with efficient blowers, rakes, and haul-away so your lawn can breathe and your beds stay clean heading into winter or spring.',
+      'When leaves blanket your yard, they smother grass and clutter beds fast. We clear full properties with efficient blowers, rakes, and haul-away — including walkways, corners, and hard-to-reach spots — so your Northern Kentucky home looks cared for heading into winter or spring.',
     benefits: [
-      'Protects grass from smothering and disease',
-      'Clears walkways, beds, and hard-to-reach corners',
+      'Protects turf from smothering and seasonal damage',
+      'Clears beds, walkways, and tight corners in one visit',
       'Frees up your weekends during peak leaf season',
-      'Spring cleanup removes winter debris and buildup',
+      'Spring service removes winter debris and buildup',
     ],
     includedItems: [
       'Full-yard leaf blowing and collection',
@@ -93,21 +162,21 @@ export const SERVICES: Service[] = [
       src: '/after-leaves.png',
       alt: 'Clean Kentucky yard after professional leaf removal',
     },
-    ctaText: 'Get a Leaf Removal Quote',
+    ctaText: 'Schedule Leaf Cleanup',
     icon: Leaf,
   },
   {
     slug: 'landscaping',
     title: 'Landscaping',
     shortDescription:
-      'Custom landscape design, planting, and bed installation that boosts curb appeal and property value.',
+      'Front-yard refreshes, bed redesigns, and planting that boost curb appeal across Northern Kentucky neighborhoods.',
     longDescription:
-      'From front-yard refreshes to full bed redesigns, we help Kentucky homeowners create landscapes that look intentional and thrive in local conditions. We handle layout, planting, and finishing details so the result feels polished from day one.',
+      'First impressions start at the curb. From reshaping tired beds to full front-yard refreshes, we help Northern Kentucky homeowners create landscapes that look intentional, thrive in local conditions, and feel finished from day one.',
     benefits: [
-      'Stronger curb appeal and first impressions',
-      'Plant selections suited to Kentucky climate',
+      'Stronger curb appeal that makes your home stand out',
+      'Plant selections suited to Northern Kentucky climate',
       'Cohesive bed shapes and clean transitions',
-      'Increased property value with professional design',
+      'A polished look that complements your lawn care plan',
     ],
     includedItems: [
       'Bed layout and reshape consultation',
@@ -119,21 +188,21 @@ export const SERVICES: Service[] = [
       src: '/landscape-design.png',
       alt: 'Professionally landscaped front yard beds in Kentucky',
     },
-    ctaText: 'Get a Landscaping Quote',
+    ctaText: 'Start My Landscaping Quote',
     icon: Trees,
   },
   {
     slug: 'seasonal-cleanup',
     title: 'Seasonal Cleanup',
     shortDescription:
-      'Spring and fall property resets including debris removal, bed cleaning, and pruning.',
+      'Spring and fall property resets — debris removal, bed cleaning, and pruning to get your yard season-ready.',
     longDescription:
-      'Seasonal transitions are the perfect time to reset your property. Our spring and fall cleanups clear debris, refresh beds, and tidy borders so your yard starts each season looking maintained and ready for regular care.',
+      'Every season deserves a fresh start. Our spring and fall cleanups clear debris, refresh beds, and tidy borders across Northern Kentucky — so your property looks maintained and ready for mowing, mulch, or planting work.',
     benefits: [
-      'Head-start on spring growth and fall winterization',
+      'Head start on spring growth or fall winterization',
       'Removes branches, sticks, and storm debris',
-      'Refreshes beds before mulch or planting work',
-      'Pairs well with mowing and leaf removal plans',
+      'Refreshes beds before mulch or landscaping work',
+      'Pairs easily with mowing and leaf removal plans',
     ],
     includedItems: [
       'Property-wide debris pickup',
@@ -145,18 +214,18 @@ export const SERVICES: Service[] = [
       src: '/seasonal-leaves.png',
       alt: 'Seasonal yard cleanup on a Kentucky property',
     },
-    ctaText: 'Get a Seasonal Cleanup Quote',
+    ctaText: 'Book Seasonal Cleanup',
     icon: Sprout,
   },
   {
     slug: 'mulch-installation',
     title: 'Mulch Installation',
     shortDescription:
-      'Premium mulch delivery and installation that locks in moisture and gives beds a clean, finished look.',
+      'Fresh mulch delivery and installation that locks in moisture and gives your beds a clean, finished look.',
     longDescription:
-      'Fresh mulch instantly elevates your landscape. We deliver quality mulch and install it with consistent depth and clean edges, helping beds retain moisture, suppress weeds, and look professionally finished.',
+      'New mulch instantly elevates a property. We deliver quality mulch and install it with consistent depth and clean edges — helping Northern Kentucky beds retain moisture, suppress weeds, and look professionally finished.',
     benefits: [
-      'Cleaner, more uniform bed appearance',
+      'Instantly cleaner, more uniform bed appearance',
       'Better moisture retention through summer heat',
       'Natural weed suppression between visits',
       'Protects plant roots through seasonal temperature swings',
@@ -171,20 +240,20 @@ export const SERVICES: Service[] = [
       src: '/gallery-mulch.png',
       alt: 'Fresh mulch installed in landscaped garden beds',
     },
-    ctaText: 'Get a Mulch Installation Quote',
+    ctaText: 'Get My Mulch Quote',
     icon: Layers,
   },
   {
     slug: 'trimming-edging',
     title: 'Trimming & Edging',
     shortDescription:
-      'Crisp edges, shaped shrubs, and clean borders that make your whole property look professionally maintained.',
+      'Crisp lawn edges, shaped shrubs, and clean borders that make your whole property look professionally maintained.',
     longDescription:
-      'Details make the difference. Our trimming and edging service sharpens lawn lines, shapes shrubs, and cleans up overgrowth so the entire property looks cared for — even between full mowing visits.',
+      'The details set premium properties apart. Our trimming and edging service sharpens lawn lines, shapes shrubs, and clears overgrowth — so your Northern Kentucky home looks cared for between full mowing visits.',
     benefits: [
       'Defined borders that frame your lawn and beds',
       'Healthier shrubs with proper shaping',
-      'Polished look between full service visits',
+      'A polished look between full service visits',
       'Ideal add-on for mowing and landscaping clients',
     ],
     includedItems: [
@@ -197,7 +266,7 @@ export const SERVICES: Service[] = [
       src: '/gallery-edge.png',
       alt: 'Crisp lawn edging along a Kentucky sidewalk',
     },
-    ctaText: 'Get a Trimming & Edging Quote',
+    ctaText: 'Request Trimming & Edging',
     icon: Ruler,
   },
 ]
@@ -214,21 +283,36 @@ export function getServicePath(slug: string): string {
   return `/services/${slug}`
 }
 
+export function getServicePageSeo(service: Service): PageSeo {
+  return {
+    title: service.title,
+    description: service.shortDescription,
+    path: getServicePath(service.slug),
+    ogImage: service.image.src,
+    ogImageAlt: service.image.alt,
+  }
+}
+
 export const QUOTE_BENEFITS = [
-  'Free, no-obligation quote',
-  'Response within one business day',
-  'Reliable, scheduled service',
+  'Free quote with no obligation',
+  'Friendly follow-up within one business day',
+  'Reliable scheduling from a local crew',
 ]
 
 export const QUOTE_FORM = {
   title: 'Request a Free Quote',
-  submitLabel: 'Request My Free Quote',
-  submittingLabel: 'Sending request...',
-  disclaimer: 'By submitting you agree to be contacted about your quote.',
-  successTitle: 'Thanks! We got your request.',
-  successMessage: 'A member of our team will reach out within one business day.',
+  intro:
+    'Tell us about your Northern Kentucky property and the services you need. We will follow up with a clear estimate — no pressure, no obligation.',
+  submitLabel: 'Send My Free Quote Request',
+  submittingLabel: 'Sending your request...',
+  disclaimer:
+    'By submitting, you agree to be contacted about your quote request. We respect your time and never share your information.',
+  successTitle: 'Thanks — we received your request.',
+  successMessage:
+    'A friendly member of our local team will reach out within one business day.',
   errorTitle: 'We could not send your request',
-  errorHelpText: 'Please check the fields below and try again, or call us directly.',
+  errorHelpText:
+    'Please check the fields below and try again, or call us directly at',
   fields: {
     name: { label: 'Full name', placeholder: 'Jane Doe' },
     phone: { label: 'Phone', placeholder: '(859) 555-0123' },
@@ -236,13 +320,22 @@ export const QUOTE_FORM = {
     addressOrZip: {
       label: 'Address or ZIP code',
       placeholder: '123 Highland Ave, Fort Thomas, KY 41075',
+      helperText:
+        'Your address or ZIP helps us confirm service availability in Northern Kentucky.',
     },
-    serviceNeeded: { label: 'Service needed' },
+    serviceNeeded: {
+      label: 'Service needed',
+      helperText: 'Select the service that best matches what you are looking for.',
+    },
     propertyType: { label: 'Property type' },
-    preferredContactMethod: { label: 'Preferred contact method' },
+    preferredContactMethod: {
+      label: 'Preferred contact method',
+      helperText: 'Choose how you would like us to follow up about your quote.',
+    },
     message: {
       label: 'Additional details (optional)',
-      placeholder: 'Tell us about your property, timeline, or special requests.',
+      placeholder:
+        'Share your timeline, yard size, problem areas, or anything else that helps us quote accurately.',
     },
   },
 }
@@ -260,21 +353,25 @@ export const TRUST_ITEMS: TrustItem[] = [
 ]
 
 export const HERO = {
-  badge: 'Locally owned & operated in Northern Kentucky',
-  title: 'A greener lawn, a cleaner yard, all season long.',
+  badge: 'Northern Kentucky · Locally owned',
+  title: 'A beautiful yard, without the weekend work.',
   description:
-    'Professional lawn care, landscaping, and leaf removal you can rely on. Friendly local crews, dependable scheduling, and free quotes with no obligation.',
+    'From weekly mowing to fall leaf cleanup and fresh mulch, our friendly local crew keeps Northern Kentucky properties looking sharp — with reliable scheduling and free quotes.',
+  trustPoints: [
+    'Locally owned in Northern Kentucky',
+    'Free quotes with no obligation',
+  ],
   image: {
     src: '/hero-lawn.png',
-    alt: 'Freshly mowed, lush green lawn in front of a charming Kentucky home',
+    alt: 'Freshly mowed, lush green lawn in front of a Northern Kentucky home',
   },
   statBadge: {
-    value: COMPANY.yearsServing,
-    label: 'years serving\nNorthern Kentucky',
+    value: 'NKY',
+    label: 'lawn care, leaf removal\n& seasonal cleanup',
   },
   quoteBadge: {
-    title: 'Free quote',
-    subtitle: 'No obligation',
+    title: 'Free local quote',
+    subtitle: 'Response within one business day',
   },
 }
 
@@ -282,77 +379,79 @@ export type SectionCopy = {
   eyebrow: string
   title: string
   description: string
+  badge?: string
 }
 
 export const SECTION_COPY = {
   services: {
-    eyebrow: 'What we do',
-    title: 'Full-service lawn & landscape care',
+    eyebrow: 'Our services',
+    title: 'Everything your Northern Kentucky yard needs',
     description:
-      'One trusted local crew for everything your property needs, from weekly mowing to a complete seasonal reset.',
+      'One reliable local crew for mowing, leaf removal, landscaping, mulch, and seasonal cleanup — so your property stays polished year-round.',
   },
   gallery: {
-    eyebrow: 'Our work',
-    title: 'See the difference for yourself',
+    eyebrow: 'Recent work',
+    title: 'Results you can see before you book',
     description:
-      'Real Kentucky properties, transformed. Browse recent lawn care, landscaping, and cleanup projects across Northern Kentucky.',
+      'Browse lawn care, landscaping, and cleanup projects from properties across Northern Kentucky. Every visit is finished with the same attention to detail.',
   },
   beforeAfter: {
-    eyebrow: 'Before & After',
-    title: 'See the difference a clean yard can make',
+    eyebrow: 'Before & after',
+    title: 'See what a thorough cleanup can do',
     description:
-      'Drag the slider to compare a property before and after our crew finished a full leaf removal and cleanup.',
+      'Drag the slider to compare a Northern Kentucky property before and after our crew completed a full leaf removal and seasonal cleanup.',
   },
   howItWorks: {
-    eyebrow: 'Simple process',
-    title: 'How it works',
+    eyebrow: 'How it works',
+    title: 'Three simple steps to a better yard',
     description:
-      'Getting started is easy. Three steps stand between you and a property you are proud of.',
+      'Getting started takes less than two minutes. Request a free quote and our local team handles the rest.',
   },
   reviews: {
-    eyebrow: 'Loved by neighbors',
-    title: 'Trusted across Northern Kentucky',
+    eyebrow: 'Customer feedback',
+    title: 'Verified reviews coming soon',
     description:
-      'We earn our reputation one happy yard at a time. Here is what local homeowners have to say.',
+      'We are collecting feedback from Northern Kentucky homeowners. In the meantime, here is what you can expect from every visit — or request a free quote and see for yourself.',
   },
   serviceAreas: {
-    eyebrow: 'Where we work',
+    eyebrow: 'Service areas',
     title: 'Proudly serving Northern Kentucky',
     description:
-      'Locally owned lawn care and landscaping for cities across Northern Kentucky. Select your community below or request a quote to confirm service availability.',
+      'Locally owned lawn care and landscaping for neighborhoods across Northern Kentucky. Select your community below or request a quote to confirm availability.',
   },
   faq: {
-    eyebrow: 'Good to know',
-    title: 'Frequently asked questions',
+    eyebrow: 'FAQ',
+    title: 'Questions before you book?',
     description:
-      'Everything you need to know before you book. Still have a question? Just give us a call.',
+      'Straight answers about quotes, scheduling, and what to expect. Still unsure? Call our friendly local team anytime.',
   },
   finalCta: {
-    badge: 'Get started today',
-    title: 'Ready for a yard you can be proud of?',
+    eyebrow: 'Ready when you are',
+    badge: 'Ready when you are',
+    title: 'Get a yard you are proud to come home to',
     description:
-      'Request your free quote and a friendly local team member will be in touch. No pressure, no obligation.',
+      'Request your free quote today. A local team member will follow up with a clear estimate — no pressure, no obligation.',
   },
 } satisfies Record<string, SectionCopy>
 
 export const STEPS = [
   {
     step: '01',
-    title: 'Request a quote',
+    title: 'Tell us about your property',
     description:
-      'Tell us about your property and what you need. It takes less than two minutes and there is zero obligation.',
+      'Share your address, the services you need, and how you would like us to follow up. It takes less than two minutes.',
   },
   {
     step: '02',
-    title: 'Get your estimate',
+    title: 'Receive a clear estimate',
     description:
-      'We review your details, visit if needed, and send a clear, upfront estimate with no hidden fees.',
+      'We review your details, visit if needed, and send a straightforward quote with no hidden fees or pressure.',
   },
   {
     step: '03',
     title: 'Enjoy a cleaner property',
     description:
-      'Our local crew gets to work on a schedule you can count on, season after season.',
+      'Our friendly local crew gets to work on a schedule you can count on — mowing, cleanup, mulch, and more.',
   },
 ]
 
@@ -526,116 +625,98 @@ export const FEATURED_GALLERY_IDS = [
 export const BEFORE_AFTER = {
   before: {
     src: '/before-leaves.png',
-    alt: 'Kentucky yard covered in fallen leaves before cleanup',
+    alt: 'Northern Kentucky yard covered in fallen leaves before cleanup',
   },
   after: {
     src: '/after-leaves.png',
-    alt: 'Same Kentucky yard after professional leaf removal',
+    alt: 'Same Northern Kentucky yard after professional leaf removal and cleanup',
   },
-  ctaLabel: 'Request a Free Quote',
+  ctaLabel: 'Get My Free Quote',
 }
 
 export const GALLERY_PREVIEW = {
-  buttonLabel: 'View Full Gallery',
+  buttonLabel: 'Browse Full Gallery',
 }
 
 export const GALLERY_CTA = {
-  badge: 'Your yard could be next',
-  title: 'Ready for results like these?',
+  badge: 'Your yard could look like this',
+  title: 'Ready for a property you are proud of?',
   description:
-    'Request a free quote and tell us about your property. We will follow up with a clear estimate and scheduling options.',
-  buttonLabel: 'Request a Free Quote',
+    'Request a free quote and tell us about your lawn, beds, or seasonal cleanup needs. We will follow up with a clear estimate and scheduling options.',
+  buttonLabel: 'Request My Free Quote',
 }
 
 export const SEASONAL_PROMO = {
-  badge: 'Fall Season Special',
-  title: 'Fall Leaf Cleanup Slots Fill Fast',
-  description: 'Reserve your seasonal cleanup before the rush.',
+  badge: 'Fall in Northern Kentucky',
+  title: 'Fall leaf cleanup slots fill fast',
+  description:
+    'Reserve your seasonal cleanup before leaves peak. Our local crew handles full-property removal, haul-away, and bed cleanup so your yard stays tidy through winter.',
+  primaryCta: 'Reserve My Cleanup',
+  secondaryCta: 'Call Now',
   image: {
     src: '/seasonal-leaves.png',
-    alt: 'Autumn leaves being cleared from a Kentucky yard',
+    alt: 'Autumn leaves being cleared from a Northern Kentucky yard',
   },
 }
 
-export type Testimonial = {
+export type ReviewPlaceholder = {
   id: string
-  customerName: string
-  location: string
-  rating: number
-  quote: string
   service: string
-  date: string
+  title: string
+  description: string
 }
 
-export const TESTIMONIALS: Testimonial[] = [
+export const REVIEW_PLACEHOLDERS: ReviewPlaceholder[] = [
   {
-    id: 'marcus-bell',
-    customerName: 'Marcus Bell',
-    location: 'Fort Thomas, KY',
-    rating: 5,
-    quote:
-      'Best lawn care decision we have made. The crew is reliable, friendly, and our yard has never looked better. The fall leaf cleanup alone is worth every penny.',
+    id: 'lawn-care',
     service: 'Lawn Care',
-    date: 'September 2025',
+    title: 'Consistent results, visit after visit',
+    description:
+      'Reliable mowing, clean edges, and clipping removal on a schedule that fits your Northern Kentucky property.',
   },
   {
-    id: 'danielle-carter',
-    customerName: 'Danielle Carter',
-    location: 'Newport, KY',
-    rating: 5,
-    quote:
-      'They redesigned our front beds and installed fresh mulch and it completely transformed the house. Genuinely felt like a local business that cares.',
-    service: 'Landscaping',
-    date: 'June 2025',
-  },
-  {
-    id: 'tom-whitfield',
-    customerName: 'Tom Whitfield',
-    location: 'Covington, KY',
-    rating: 5,
-    quote:
-      'Scheduling is rock solid. They show up when they say they will and the property always looks immaculate afterward. Highly recommend.',
-    service: 'Lawn Care',
-    date: 'August 2025',
-  },
-  {
-    id: 'sarah-mitchell',
-    customerName: 'Sarah Mitchell',
-    location: 'Bellevue, KY',
-    rating: 5,
-    quote:
-      'Our fall leaf removal was handled quickly and thoroughly. They cleared beds, walkways, and the back yard without us having to follow up.',
+    id: 'leaf-removal',
     service: 'Leaf Removal',
-    date: 'November 2025',
+    title: 'Thorough cleanup when leaves pile up',
+    description:
+      'Full-yard leaf collection, bed clearing, and haul-away so your lawn can breathe through fall and spring.',
   },
   {
-    id: 'james-porter',
-    customerName: 'James Porter',
-    location: 'Alexandria, KY',
-    rating: 5,
-    quote:
-      'The spring cleanup made a huge difference before we started our mowing plan. Everything looked fresh and ready within a day.',
+    id: 'landscaping',
+    service: 'Landscaping',
+    title: 'Curb appeal that feels finished',
+    description:
+      'Bed refreshes, planting, and clean transitions that make your home stand out on the block.',
+  },
+  {
+    id: 'seasonal-cleanup',
     service: 'Seasonal Cleanup',
-    date: 'March 2025',
+    title: 'A fresh start each season',
+    description:
+      'Debris removal, bed tidying, and light pruning to get your property ready for the season ahead.',
   },
   {
-    id: 'linda-hayes',
-    customerName: 'Linda Hayes',
-    location: 'Cold Spring, KY',
-    rating: 5,
-    quote:
-      'Mulch installation was neat, consistent, and finished the same day. Our beds finally look as polished as the rest of the property.',
+    id: 'mulch',
     service: 'Mulch Installation',
-    date: 'April 2025',
+    title: 'Beds that look professionally finished',
+    description:
+      'Even mulch depth, clean edges, and hard-surface cleanup for a polished look that lasts.',
+  },
+  {
+    id: 'trimming',
+    service: 'Trimming & Edging',
+    title: 'Sharp details between visits',
+    description:
+      'Crisp lawn lines and shaped shrubs that keep your whole property looking cared for.',
   },
 ]
 
 export const REVIEWS_CTA = {
-  badge: 'Join our happy customers',
-  title: 'See why neighbors trust Kentucky Lawn & Leaf',
+  badge: 'Experience it yourself',
+  title: 'See why Northern Kentucky homeowners choose us',
   description:
-    'Request a free quote and find out how we can keep your property looking its best all season long.',
-  buttonLabel: 'Request a Free Quote',
+    'Request a free quote and meet the friendly local crew behind every mow, cleanup, and landscape refresh.',
+  buttonLabel: 'Request My Free Quote',
 }
 
 export type ServiceArea = {
@@ -651,21 +732,21 @@ export const SERVICE_AREAS: ServiceArea[] = [
     city: 'Fort Thomas',
     state: 'KY',
     shortDescription:
-      'Reliable lawn care, landscaping, and seasonal cleanup for Fort Thomas homes and neighborhoods.',
+      'Reliable mowing, leaf removal, and seasonal cleanup for Fort Thomas homes and neighborhoods.',
   },
   {
     slug: 'newport',
     city: 'Newport',
     state: 'KY',
     shortDescription:
-      'Professional yard maintenance and leaf removal serving Newport properties year-round.',
+      'Professional lawn care and fall cleanup for Newport properties — weekly plans or one-time visits.',
   },
   {
     slug: 'covington',
     city: 'Covington',
     state: 'KY',
     shortDescription:
-      'Full-service lawn and landscape care for residential and rental properties across Covington.',
+      'Full-service lawn and landscape care for Covington homeowners, rentals, and multi-unit properties.',
   },
   {
     slug: 'bellevue',
@@ -679,21 +760,21 @@ export const SERVICE_AREAS: ServiceArea[] = [
     city: 'Dayton',
     state: 'KY',
     shortDescription:
-      'Dependable mowing, edging, and cleanup services tailored to Dayton homeowners.',
+      'Dependable mowing, edging, mulch, and cleanup tailored to Dayton homeowners.',
   },
   {
     slug: 'alexandria',
     city: 'Alexandria',
     state: 'KY',
     shortDescription:
-      'Lawn care and landscape support for Alexandria homes, from weekly mowing to seasonal resets.',
+      'Lawn care and landscape support in Alexandria — from weekly mowing to full seasonal resets.',
   },
   {
     slug: 'highland-heights',
     city: 'Highland Heights',
     state: 'KY',
     shortDescription:
-      'Consistent lawn maintenance and landscaping for Highland Heights properties of every size.',
+      'Consistent lawn maintenance, leaf removal, and landscaping for Highland Heights properties.',
   },
   {
     slug: 'cold-spring',
@@ -714,6 +795,14 @@ export function getAllServiceAreaSlugs(): string[] {
 
 export function getServiceAreaPath(slug: string): string {
   return `/service-areas/${slug}`
+}
+
+export function getServiceAreaPageSeo(area: ServiceArea): PageSeo {
+  return {
+    title: `${area.city}, ${area.state} Lawn Care`,
+    description: area.shortDescription,
+    path: getServiceAreaPath(area.slug),
+  }
 }
 
 export type FaqItem = {
@@ -745,40 +834,40 @@ export function getServiceAreaFaqs(area: ServiceArea): FaqItem[] {
         'Yes. Weekly and bi-weekly mowing plans are available along with seasonal packages so your property stays maintained without the hassle.',
     },
     {
-      question: 'Are you licensed and insured?',
+      question: 'What can I expect from your crew?',
       answer:
-        'Absolutely. Kentucky Lawn & Leaf is fully licensed and insured, so your property and our crew are always protected.',
+        'Friendly local professionals who communicate clearly, show up on schedule, and leave your property looking clean and cared for after every visit.',
     },
   ]
 }
 
 export const LOCAL_TRUST_COPY = {
   eyebrow: 'Local & reliable',
-  title: 'Why neighbors trust us',
+  title: 'Why Northern Kentucky homeowners choose us',
   description:
-    'Locally owned crews, dependable scheduling, and clear communication on every visit.',
+    'Locally owned crews, dependable scheduling, and clear communication on every visit — from the first quote to the final blow-off.',
 }
 
 export const FAQS: FaqItem[] = [
   {
     question: 'How do I request a quote?',
     answer:
-      'Tap "Request a Free Quote" on our website or call us directly. Share your name, contact details, address, and the services you need. We will follow up with a clear, no-obligation estimate, usually within one business day.',
+      'Tap "Request a Free Quote" on our website or call us directly. Share your name, contact details, address, and the services you need. We will follow up with a clear, no-obligation estimate — usually within one business day.',
   },
   {
     question: 'Do you offer one-time cleanups?',
     answer:
-      'Yes. We offer one-time seasonal cleanups, leaf removal visits, mulch installation, and other standalone projects in addition to recurring lawn care plans.',
+      'Yes. We handle one-time seasonal cleanups, leaf removal visits, mulch installation, and other standalone projects — in addition to recurring lawn care plans.',
   },
   {
     question: 'Do you offer recurring lawn care?',
     answer:
-      'Yes. Weekly and bi-weekly mowing plans are available along with seasonal service packages. You choose the schedule and we handle the rest with reliable, on-time visits.',
+      'Yes. Weekly and bi-weekly mowing plans are available, along with seasonal service packages. You choose the schedule and our local crew handles the rest.',
   },
   {
     question: 'What areas do you serve?',
     answer:
-      'We serve Northern Kentucky communities including Fort Thomas, Newport, Covington, Bellevue, Dayton, Alexandria, Highland Heights, and Cold Spring. If you do not see your city listed, reach out and we will confirm availability.',
+      'We serve Northern Kentucky communities including Fort Thomas, Newport, Covington, Bellevue, Dayton, Alexandria, Highland Heights, and Cold Spring. If your city is not listed, reach out and we will confirm availability.',
   },
   {
     question: 'Do I need to be home for service?',
@@ -788,12 +877,17 @@ export const FAQS: FaqItem[] = [
   {
     question: 'Do you handle leaf removal?',
     answer:
-      'Yes. We provide thorough fall and spring leaf removal, including blowing, collection, and haul-away so your lawn and beds stay clean and healthy.',
+      'Yes. We provide thorough fall and spring leaf removal across Northern Kentucky — including blowing, collection, bed cleanup, and haul-away.',
   },
   {
     question: 'Can I send photos for an estimate?',
     answer:
-      'Absolutely. Photos help us understand your property faster. Include them in your quote request message or send them when our team follows up, and we can often provide a more accurate estimate.',
+      'Absolutely. Photos help us understand your property faster. Include them in your quote request or send them when our team follows up — we can often provide a more accurate estimate.',
+  },
+  {
+    question: 'Are you a local company?',
+    answer:
+      'Yes. Kentucky Lawn & Leaf is locally owned and focused on Northern Kentucky homeowners who want reliable lawn care, landscaping, and seasonal yard work.',
   },
 ]
 

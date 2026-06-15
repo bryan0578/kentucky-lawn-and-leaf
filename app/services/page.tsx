@@ -2,15 +2,10 @@ import type { Metadata } from 'next'
 import { SiteLayout } from '@/components/layout/SiteLayout'
 import { ServicesSection } from '@/components/sections/ServicesSection'
 import { ServicesIndexSchema } from '@/components/seo/ServicesIndexSchema'
-import { ROUTES } from '@/lib/constants'
 import { createPageMetadata } from '@/lib/seo'
+import { PAGE_SEO } from '@/lib/site-data'
 
-export const metadata: Metadata = createPageMetadata({
-  title: 'Services',
-  description:
-    'Lawn care, landscaping, leaf removal, seasonal cleanup, mulch installation, and trimming and edging across Northern Kentucky.',
-  path: ROUTES.services,
-})
+export const metadata: Metadata = createPageMetadata(PAGE_SEO.services)
 
 export default function ServicesPage() {
   return (

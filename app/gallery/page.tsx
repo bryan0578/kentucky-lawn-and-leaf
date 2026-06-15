@@ -8,14 +8,9 @@ import { SectionHeading } from '@/components/section-heading'
 import { Button } from '@/components/ui/button'
 import { ROUTES } from '@/lib/constants'
 import { createPageMetadata } from '@/lib/seo'
-import { GALLERY_CTA, SECTION_COPY } from '@/lib/site-data'
+import { GALLERY_CTA, PAGE_SEO, SECTION_COPY } from '@/lib/site-data'
 
-export const metadata: Metadata = createPageMetadata({
-  title: 'Gallery',
-  description:
-    'Browse lawn care, landscaping, leaf removal, cleanup, and mulch projects from Kentucky Lawn & Leaf.',
-  path: ROUTES.gallery,
-})
+export const metadata: Metadata = createPageMetadata(PAGE_SEO.gallery)
 
 export default function GalleryPage() {
   const copy = SECTION_COPY.gallery

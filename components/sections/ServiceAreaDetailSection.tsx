@@ -4,7 +4,10 @@ import { FAQSection } from '@/components/sections/FAQSection'
 import { ServiceAreaQuoteCta } from '@/components/sections/ServiceAreaQuoteCta'
 import { JsonLd } from '@/components/seo/JsonLd'
 import { ROUTES, serviceRoute } from '@/lib/constants'
-import { buildServiceAreaJsonLd } from '@/lib/structured-data'
+import {
+  buildServiceAreaBreadcrumbJsonLd,
+  buildServiceAreaJsonLd,
+} from '@/lib/structured-data'
 import {
   getServiceAreaFaqs,
   LOCAL_TRUST_COPY,
@@ -24,14 +27,8 @@ export function ServiceAreaDetailSection({
 
   return (
     <>
-      <JsonLd
-        data={buildServiceAreaJsonLd(
-          area.slug,
-          area.city,
-          area.state,
-          area.shortDescription,
-        )}
-      />
+      <JsonLd data={buildServiceAreaJsonLd(area)} />
+      <JsonLd data={buildServiceAreaBreadcrumbJsonLd(area)} />
       <section className="py-12 lg:py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <Link

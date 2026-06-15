@@ -1,39 +1,36 @@
-import { serviceAreaRoute, serviceRoute } from '@/lib/constants'
-import { absoluteUrl, SITE_URL } from '@/lib/seo'
+import { ROUTES, serviceAreaRoute, serviceRoute } from '@/lib/constants'
+import { absoluteUrl } from '@/lib/seo'
 import {
   COMPANY,
   SERVICE_AREAS,
   SERVICES,
+  SITE,
   type FaqItem,
   type Service,
+  type ServiceArea,
 } from '@/lib/site-data'
 
 const BUSINESS_TYPE = 'LandscapingBusiness'
 
-const SERVICE_NAMES = [
-  'Lawn care',
-  'Landscaping',
-  'Leaf removal',
-  'Seasonal cleanup',
-  'Mulch installation',
-  'Trimming and edging',
-]
+export type BreadcrumbItem = {
+  name: string
+  path: string
+}
 
 export function buildLocalBusinessJsonLd() {
   return {
     '@context': 'https://schema.org',
     '@type': BUSINESS_TYPE,
     name: COMPANY.name,
-    url: SITE_URL,
+    url: SITE.url,
     image: absoluteUrl('/hero-lawn.png'),
     logo: absoluteUrl('/KLL_Header_Logo.png'),
     telephone: COMPANY.phoneHref.replace('tel:', ''),
     email: COMPANY.email,
     description: COMPANY.tagline,
-    priceRange: '$$',
     address: {
       '@type': 'PostalAddress',
-      addressLocality: 'Northern Kentucky',
+      addressLocality: COMPANY.location,
       addressRegion: 'KY',
       addressCountry: 'US',
     },
@@ -48,21 +45,21 @@ export function buildLocalBusinessJsonLd() {
     hasOfferCatalog: {
       '@type': 'OfferCatalog',
       name: 'Lawn and landscape services',
-      itemListElement: SERVICE_NAMES.map((name, index) => ({
+      itemListElement: SERVICES.map((service, index) => ({
         '@type': 'Offer',
         position: index + 1,
         itemOffered: {
           '@type': 'Service',
-          name,
+          name: service.title,
+          url: absoluteUrl(serviceRoute(service.slug)),
           provider: {
             '@type': BUSINESS_TYPE,
             name: COMPANY.name,
-            url: SITE_URL,
+            url: SITE.url,
           },
         },
       })),
     },
-    sameAs: [],
   }
 }
 
@@ -77,12 +74,12 @@ export function buildServiceJsonLd(service: Service) {
     provider: {
       '@type': BUSINESS_TYPE,
       name: COMPANY.name,
-      url: SITE_URL,
+      url: SITE.url,
       telephone: COMPANY.phoneHref.replace('tel:', ''),
     },
     areaServed: {
       '@type': 'AdministrativeArea',
-      name: 'Northern Kentucky',
+      name: COMPANY.location,
     },
     serviceType: service.title,
   }
@@ -110,29 +107,56 @@ export function buildFaqJsonLd(faqs: FaqItem[]) {
   }
 }
 
-export function buildServiceAreaJsonLd(
-  slug: string,
-  city: string,
-  state: string,
-  description: string,
-) {
+export function buildBreadcrumbJsonLd(items: BreadcrumbItem[]) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: items.map((item, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: item.name,
+      item: absoluteUrl(item.path),
+    })),
+  }
+}
+
+export function buildServiceBreadcrumbJsonLd(service: Service) {
+  return buildBreadcrumbJsonLd([
+    { name: 'Home', path: ROUTES.home },
+    { name: 'Services', path: ROUTES.services },
+    { name: service.title, path: serviceRoute(service.slug) },
+  ])
+}
+
+export function buildServiceAreaBreadcrumbJsonLd(area: ServiceArea) {
+  return buildBreadcrumbJsonLd([
+    { name: 'Home', path: ROUTES.home },
+    { name: 'Service Areas', path: ROUTES.serviceAreas },
+    {
+      name: `${area.city}, ${area.state}`,
+      path: serviceAreaRoute(area.slug),
+    },
+  ])
+}
+
+export function buildServiceAreaJsonLd(area: ServiceArea) {
   return {
     '@context': 'https://schema.org',
     '@type': 'Service',
-    name: `Lawn care and landscaping in ${city}, ${state}`,
-    description,
-    url: absoluteUrl(serviceAreaRoute(slug)),
+    name: `Lawn care and landscaping in ${area.city}, ${area.state}`,
+    description: area.shortDescription,
+    url: absoluteUrl(serviceAreaRoute(area.slug)),
     provider: {
       '@type': BUSINESS_TYPE,
       name: COMPANY.name,
-      url: SITE_URL,
+      url: SITE.url,
     },
     areaServed: {
       '@type': 'City',
-      name: city,
+      name: area.city,
       containedInPlace: {
         '@type': 'State',
-        name: state,
+        name: area.state,
       },
     },
   }

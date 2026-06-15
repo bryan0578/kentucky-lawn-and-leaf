@@ -2,16 +2,10 @@ import type { Metadata } from 'next'
 import { Phone, CheckCircle2 } from 'lucide-react'
 import { QuoteRequestForm } from '@/components/forms/QuoteRequestForm'
 import { SiteLayout } from '@/components/layout/SiteLayout'
-import { ROUTES } from '@/lib/constants'
 import { createPageMetadata } from '@/lib/seo'
-import { COMPANY, QUOTE_BENEFITS, SECTION_COPY } from '@/lib/site-data'
+import { COMPANY, PAGE_SEO, QUOTE_BENEFITS, SECTION_COPY } from '@/lib/site-data'
 
-export const metadata: Metadata = createPageMetadata({
-  title: 'Request a Quote',
-  description:
-    'Request a free, no-obligation quote for lawn care, landscaping, or leaf removal in Northern Kentucky.',
-  path: ROUTES.requestQuote,
-})
+export const metadata: Metadata = createPageMetadata(PAGE_SEO.requestQuote)
 
 export default function RequestQuotePage() {
   const copy = SECTION_COPY.finalCta

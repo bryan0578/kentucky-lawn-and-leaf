@@ -1,8 +1,8 @@
 import { Analytics } from '@vercel/analytics/next'
-import type { Viewport } from 'next'
+import type { Metadata, Viewport } from 'next'
 import { Geist, Geist_Mono, Fraunces } from 'next/font/google'
-import { LocalBusinessSchema } from '@/components/seo/LocalBusinessSchema'
-import { rootMetadata } from '@/lib/seo'
+import { createRootMetadata } from '@/lib/seo'
+import { COMPANY, SITE } from '@/lib/site-data'
 import './globals.css'
 
 const geistSans = Geist({ variable: '--font-geist-sans', subsets: ['latin'] })
@@ -16,7 +16,12 @@ const fraunces = Fraunces({
   weight: ['400', '500', '600', '700'],
 })
 
-export const metadata = rootMetadata
+// Root defaults sourced from COMPANY and SITE in lib/site-data.ts
+export const metadata: Metadata = {
+  ...createRootMetadata(),
+  metadataBase: new URL(SITE.url),
+  applicationName: COMPANY.name,
+}
 
 export const viewport: Viewport = {
   colorScheme: 'light',
@@ -34,7 +39,6 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} ${fraunces.variable} bg-background`}
     >
       <body className="font-sans antialiased">
-        <LocalBusinessSchema />
         {children}
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>

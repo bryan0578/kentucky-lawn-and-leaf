@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { Phone, Star, CheckCircle2 } from 'lucide-react'
+import { Phone, CheckCircle2 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { ROUTES, SECTION_IDS } from '@/lib/constants'
 import { COMPANY, HERO } from '@/lib/site-data'
@@ -29,7 +29,7 @@ export function HeroSection() {
               nativeButton={false}
               className="h-12 px-6 text-base"
               render={
-                <Link href={ROUTES.requestQuote}>Request a Free Quote</Link>
+                <Link href={ROUTES.requestQuote}>Get My Free Quote</Link>
               }
             />
             <Button
@@ -47,20 +47,15 @@ export function HeroSection() {
           </div>
 
           <div className="mt-7 flex flex-wrap items-center gap-x-6 gap-y-3">
-            <div className="flex items-center gap-2">
-              <div className="flex">
-                {Array.from({ length: 5 }).map((_, i) => (
-                  <Star key={i} className="size-4 fill-gold text-gold" />
-                ))}
+            {HERO.trustPoints.map((point) => (
+              <div
+                key={point}
+                className="flex items-center gap-2 text-sm font-medium text-foreground"
+              >
+                <CheckCircle2 className="size-4 text-primary" />
+                {point}
               </div>
-              <span className="text-sm font-medium text-foreground">
-                {COMPANY.rating}
-              </span>
-            </div>
-            <div className="flex items-center gap-2 text-sm font-medium text-foreground">
-              <CheckCircle2 className="size-4 text-primary" />
-              {COMPANY.licensedLabel}
-            </div>
+            ))}
           </div>
         </div>
 

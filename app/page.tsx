@@ -11,23 +11,16 @@ import { SeasonalPromoSection } from '@/components/sections/SeasonalPromoSection
 import { ServiceAreasSection } from '@/components/sections/ServiceAreasSection'
 import { ServicesSection } from '@/components/sections/ServicesSection'
 import { TrustBar } from '@/components/sections/TrustBar'
-import { ROUTES } from '@/lib/constants'
-import { createPageMetadata, DEFAULT_DESCRIPTION } from '@/lib/seo'
+import { LocalBusinessSchema } from '@/components/seo/LocalBusinessSchema'
+import { createPageMetadata } from '@/lib/seo'
+import { PAGE_SEO } from '@/lib/site-data'
 
-export const metadata: Metadata = {
-  ...createPageMetadata({
-    title: 'Lawn Care, Landscaping & Leaf Removal',
-    description: DEFAULT_DESCRIPTION,
-    path: ROUTES.home,
-  }),
-  title: {
-    absolute: 'Kentucky Lawn & Leaf | Lawn Care, Landscaping & Leaf Removal',
-  },
-}
+export const metadata: Metadata = createPageMetadata(PAGE_SEO.home)
 
 export default function HomePage() {
   return (
     <SiteLayout>
+      <LocalBusinessSchema />
       <HeroSection />
       <TrustBar />
       <ServicesSection />
