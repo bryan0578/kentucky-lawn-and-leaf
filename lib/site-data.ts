@@ -30,12 +30,14 @@ export const FOOTER = {
 }
 
 export const SITE = {
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? 'https://kylawnandleaf.com',
+  url:
+    process.env.NEXT_PUBLIC_SITE_URL?.trim() ??
+    'https://kentucky-lawn-and-leaf.vercel.app',
   locale: 'en_US' as const,
   defaultDescription:
-    'Premium lawn care, leaf removal, and landscaping for Northern Kentucky homes. Locally owned, reliable scheduling, and free quotes from a friendly local crew.',
-  defaultTitle: 'Lawn Care, Landscaping & Leaf Removal',
-  absoluteDefaultTitle: `${COMPANY.name} | Lawn Care, Landscaping & Leaf Removal`,
+    'Lawn care, landscaping, and leaf removal for Northern Kentucky homeowners. Request a free quote today.',
+  defaultTitle: 'Kentucky Lawn & Leaf | NKY Lawn Care',
+  absoluteDefaultTitle: 'Kentucky Lawn & Leaf | NKY Lawn Care',
   titleTemplate: `%s | ${COMPANY.name}`,
   ogImage: '/images/KentuckyLawnAndLeafOpenGraph.png',
   ogImageFallback: '/images/hero-lawn.png',

@@ -19,7 +19,7 @@ export async function createAuthServerClient() {
             cookieStore.set(name, value, options)
           })
         } catch {
-          // Called from a Server Component without write access — middleware handles refresh.
+          // Called from a Server Component without write access — proxy handles refresh.
         }
       },
     },

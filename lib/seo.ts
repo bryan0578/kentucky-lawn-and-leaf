@@ -61,7 +61,7 @@ export function createPageMetadata({
   noIndex = false,
 }: CreatePageMetadataOptions): Metadata {
   const url = absoluteUrl(path)
-  const imagePath = ogImage ?? getOgImagePath()
+  const imagePath = ogImage ?? SITE.ogImage
   const imageAlt = ogImageAlt ?? SITE.ogImageAlt
   const { openGraphImage, twitterImage } = buildSocialImageMetadata(
     imagePath,
@@ -111,9 +111,8 @@ export function createPageMetadata({
 }
 
 export function createRootMetadata(): Metadata {
-  const ogImagePath = getOgImagePath()
   const { openGraphImage, twitterImage } = buildSocialImageMetadata(
-    ogImagePath,
+    SITE.ogImage,
     SITE.ogImageAlt,
   )
 
