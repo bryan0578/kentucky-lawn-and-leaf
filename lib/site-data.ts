@@ -43,6 +43,9 @@ export const SITE = {
   twitterCard: 'summary_large_image' as const,
 }
 
+/** Stable year for copyright — evaluated once at build/load time, not during render. */
+export const COPYRIGHT_YEAR = new Date().getFullYear()
+
 export type PageSeo = {
   title: string
   description: string
