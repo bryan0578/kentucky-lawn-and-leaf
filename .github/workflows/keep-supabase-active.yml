@@ -1,0 +1,19 @@
+name: Keep Supabase Active
+
+on:
+  schedule:
+    - cron: "0 12 */3 * *"
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Ping Supabase health check
+        run: |
+          curl -fsS \
+            -H "Authorization: Bearer $CRON_SECRET" \
+            https://kentucky-lawn-and-leaf.vercel.app/api/health/supabase
+        env:
+          CRON_SECRET: ${{ secrets.CRON_SECRET }}
